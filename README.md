@@ -109,5 +109,3 @@ Copiar
 Editar
 
 ---
-
-Se quiser, posso te ajudar a montar esse repositório inteiro com estrutura e `.gitignore` básico. Deseja isso também?
