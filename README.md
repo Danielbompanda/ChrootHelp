@@ -64,7 +64,7 @@ Copiar
 Editar
 sudo mount /dev/sda2 /mnt
 sudo mount /dev/sda1 /mnt/boot/efi  # Se for UEFI
-sudo ./auto-chroot.sh /mnt
+sudo ./script-chroot.sh /mnt
 
 # Dentro do chroot:
 grub-install /dev/sda
