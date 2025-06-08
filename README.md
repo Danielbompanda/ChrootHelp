@@ -1,64 +1,91 @@
-🔧 auto-chroot.sh
-Script para automatizar o processo de chroot em distribuições Linux baseadas no Debian (Debian, Ubuntu, Mint, etc).
+# 🔧 auto-chroot.sh
 
-📌 Requisitos
-Distribuição live (ou outro Linux) com acesso root
+Script para automatizar o processo de `chroot` em distribuições Linux **baseadas no Debian**  
+(Debian, Ubuntu, Linux Mint, etc).
 
-Partição raiz da instalação montada em /mnt ou outro ponto
+---
 
-📥 Download
-Você pode clonar o repositório (ou criar o arquivo manualmente):
+## 📌 Requisitos
 
-bash
-Copiar
-Editar
+- Live CD/USB de qualquer distro com acesso root
+- Conhecimento da partição raiz que você quer acessar
+- Partição montada antes da execução
+
+---
+
+## 📥 Download
+
+Clone o repositório e torne o script executável:
+
+```bash
 git clone https://github.com/Danielbompanda/ChrootHelp.git
 cd seu-repo
 chmod +x auto-chroot.sh
-🚀 Como usar
-Monte a partição raiz do sistema que você quer acessar:
+Substitua seu-usuario/seu-repo pela URL real do seu repositório.
 
+🚀 Como usar
+1. Monte a partição raiz do sistema que será acessado
 bash
 Copiar
 Editar
 sudo mount /dev/sdXn /mnt
-Substitua /dev/sdXn pela partição correta do seu sistema (exemplo: /dev/sda2).
-
-Execute o script com sudo e informe o caminho da partição montada:
+Exemplo:
 
 bash
 Copiar
 Editar
+sudo mount /dev/sda2 /mnt
+📌 Se o sistema usa /boot/efi separado (UEFI), monte também:
+
+bash
+Copiar
+Editar
+sudo mount /dev/sdXn /mnt/boot/efi
+2. Execute o script
+bash
+Copiar
+Editar
 sudo ./auto-chroot.sh /mnt
-O script irá:
+3. Dentro do ambiente chroot
+Agora você pode fazer qualquer manutenção:
 
-Montar os sistemas de arquivos essenciais: /proc, /sys, /dev, /run
-
-Copiar temporariamente o resolv.conf para garantir acesso à internet
-
-Iniciar o ambiente chroot com /bin/bash
-
-Faça as modificações necessárias dentro do ambiente chroot, como reinstalar GRUB, atualizar pacotes, corrigir configurações etc.
-
-Quando sair do chroot (exit), o script desmontará automaticamente os sistemas de arquivos.
+bash
+Copiar
+Editar
+grub-install /dev/sda
+update-grub
+apt update
+passwd
+exit
+Ao digitar exit, o script desmonta os sistemas automaticamente.
 
 🔙 Exemplo completo
 bash
 Copiar
 Editar
 sudo mount /dev/sda2 /mnt
+sudo mount /dev/sda1 /mnt/boot/efi  # Se for UEFI
 sudo ./auto-chroot.sh /mnt
-# dentro do chroot:
+
+# Dentro do chroot:
 grub-install /dev/sda
 update-grub
 exit
 ⚠️ Observações
-Certifique-se de usar o dispositivo correto para grub-install, geralmente o disco (/dev/sda, não a partição /dev/sda1).
+O script monta automaticamente:
 
-Para partições UEFI, certifique-se de montar o /boot/efi também antes de executar o script.
+/proc
+
+/sys
+
+/dev
+
+/run
+
+Copia temporariamente o /etc/resolv.conf para garantir acesso à internet dentro do chroot.
 
 🛠️ Suporte a recursos avançados
-Se você usa:
+Se você utiliza:
 
 LUKS (criptografia)
 
@@ -66,7 +93,22 @@ LVM (volumes lógicos)
 
 RAID
 
-UEFI (/boot/efi separado)
+ZFS
 
-Você pode montar esses volumes antes de executar o script. Se quiser, posso ajudar a estender o script com suporte automático para esses casos também.
+Monte manualmente os volumes necessários antes de executar o script.
 
+Quer suporte automático para isso? Abra uma issue ou PR! 😉
+
+📄 Licença
+OPL 3.0
+
+🤝 Contribuições
+Sinta-se livre para abrir PRs com melhorias, correções ou adicionar suporte para outras distros!
+
+yaml
+Copiar
+Editar
+
+---
+
+Se quiser, posso te ajudar a montar esse repositório inteiro com estrutura e `.gitignore` básico. Deseja isso também?
