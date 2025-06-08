@@ -20,8 +20,7 @@ Clone o repositório e torne o script executável:
 ```bash
 git clone https://github.com/Danielbompanda/ChrootHelp.git
 cd seu-repo
-chmod +x auto-chroot.sh
-Substitua seu-usuario/seu-repo pela URL real do seu repositório.
+chmod +x script-chroot.sh
 
 🚀 Como usar
 1. Monte a partição raiz do sistema que será acessado
@@ -45,7 +44,7 @@ sudo mount /dev/sdXn /mnt/boot/efi
 bash
 Copiar
 Editar
-sudo ./auto-chroot.sh /mnt
+sudo ./script-chroot.sh /mnt
 3. Dentro do ambiente chroot
 Agora você pode fazer qualquer manutenção:
 
