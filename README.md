@@ -19,7 +19,7 @@ Clone o repositório e torne o script executável:
 
 ```bash
 git clone https://github.com/Danielbompanda/ChrootHelp.git
-cd seu-repo
+cd ChrootHelp
 chmod +x script-chroot.sh
 
 🚀 Como usar
